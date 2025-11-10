@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Listagem de CNDs — Acesso com Senha</title>
+  <meta name="description" content="Tabela de CNDs; lê cnds.txt.enc e descriptografa no navegador com senha." />
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="hdr">
+  <h1>Listagem de CNDs (Protegido)</h1>
+  <p>Digite a senha para carregar as CNDs.</p>
+</header>
+
+<main class="container">
+  <section class="panel">
+    <div class="filters">
+      <input type="search" id="search" placeholder="Filtrar por nome ou CNPJ…" disabled>
+      <select id="statusFilter" aria-label="Filtro de situação" disabled>
+        <option value="">Todas as situações</option>
+        <option value="positiva">Somente Positivas</option>
+        <option value="negativa">Somente Negativas</option>
+      </select>
+      <button class="btn" id="reload" disabled>Recarregar</button>
+      <button class="btn" id="toggleAuto" disabled>Pausar auto</button>
+      <button class="btn" id="downloadCsv" disabled>Baixar CSV</button>
+      <span class="status" id="status">Bloqueado — informe a senha</span>
+    </div>
+  </section>
+
+  <section class="table panel">
+    <div class="meta">
+      <span><strong id="count">0</strong> registros</span>
+      <span class="muted">Fonte: <code id="filePathLabel"></code></span>
+    </div>
+    <table id="table" aria-label="Tabela de CNDs">
+      <thead>
+        <tr>
+          <th data-key="nome" scope="col">Nome</th>
+          <th data-key="cnpj" scope="col">CNPJ</th>
+          <th data-key="situacao" scope="col">Situação</th>
+          <th data-key="acao" scope="col" class="col-acao">Ação</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+</main>
+
+<div id="gate" class="gate">
+  <div class="gate-card">
+    <h2>Acessar listagem</h2>
+    <p class="muted">Insira a senha para descriptografar o arquivo <code>data/cnds.txt.enc</code>.</p>
+    <input type="password" id="pwd" placeholder="Senha" />
+    <div class="gate-actions">
+      <button class="btn" id="unlock">Entrar</button>
+    </div>
+    <p id="gateError" class="err"></p>
+  </div>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
